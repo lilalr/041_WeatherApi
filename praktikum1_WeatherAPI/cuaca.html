@@ -144,7 +144,49 @@
             <div class="data-row"><label>Latitude (Lat):</label> <span id="lat">...</span></div>
         </div>
     </div>
+    <script>
+        // Gunakan API Key dari contoh Anda. Peringatan: Kunci ini sekarang terekspos.
+        const API_KEY = "f6804d7d103d4aa78a940503250610"; 
+        const BASE_URL = "http://api.weatherapi.com/v1/current.json";
 
+        const locationInput = $('#location-input');
+        const searchButton = $('#search-button');
+        const loadingDiv = $('#loading');
+        const errorDiv = $('#error-message');
+        const resultDiv = $('#tampilan');
+        
+        // Fungsi untuk mengambil data cuaca menggunakan jQuery/AJAX
+        function fetchData(location) {
+            if (!location) {
+                showError("Masukkan nama lokasi.");
+                return;
+            }
+
+            const urlapi = `${BASE_URL}?key=${API_KEY}&q=${location}&aqi=no`;
+
+            // Tampilkan loading dan sembunyikan hasil/error
+            resultDiv.hide();
+            errorDiv.hide();
+            loadingDiv.show();
+
+            $.ajax({
+                url: urlapi,
+                method: "GET",
+                success: function(data) {
+                    loadingDiv.hide();
+                    displayWeather(data);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    loadingDiv.hide();
+                    // Tangani error API (misalnya lokasi tidak ditemukan)
+                    if (jqXHR.responseJSON && jqXHR.responseJSON.error) {
+                        showError(jqXHR.responseJSON.error.message);
+                    } else {
+                        showError("Gagal mengambil data cuaca. Cek koneksi atau kunci API.");
+                    }
+                }
+            });
+        }
     
 
 </body>
