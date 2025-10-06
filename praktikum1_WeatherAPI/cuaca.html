@@ -117,5 +117,36 @@
         }
     </style>
 </head>
+<body>
 
+    <div class="weather-container">
+        <h1>Cuaca: <span id="lokasi">...</span></h1>
+
+        <div class="search-area">
+            <input type="text" id="location-input" placeholder="Masukkan Kota/Negara" value="Yogyakarta">
+            <button id="search-button">Cari</button>
+        </div>
+        
+        <div id="loading" style="display: none; color: #3f51b5; font-weight: bold;">Memuat data...</div>
+        <div id="error-message" class="error-message" style="display: none;"></div>
+
+        <hr>
+        
+        <div id="tampilan" class="weather-info">
+            <span id="suhu-utama" class="temp-display"></span>
+            <div id="kondisi-cuaca" class="temp-condition"></div>
+            
+            <div class="data-row"><label>Negara:</label> <span id="negara">...</span></div>
+            <div class="data-row"><label>Provinsi/State:</label> <span id="provinsi">...</span></div>
+            <div class="data-row"><label>Kecamatan/Kota:</label> <span id="kecamatan">...</span></div>
+            <div class="data-row"><label>Suhu Detail:</label> <span id="suhu-detail">...</span></div>
+            <div class="data-row"><label>Longitude (Lon):</label> <span id="lon">...</span></div>
+            <div class="data-row"><label>Latitude (Lat):</label> <span id="lat">...</span></div>
+        </div>
+    </div>
+
+    
+
+</body>
+</html>
 
