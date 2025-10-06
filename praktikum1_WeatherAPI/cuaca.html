@@ -187,6 +187,55 @@
                 }
             });
         }
+        // Fungsi untuk menampilkan pesan error
+        function showError(message) {
+            errorDiv.text(message).show();
+            $('#lokasi').text('Gagal Memuat');
+            resultDiv.hide();
+        }
+
+        // Fungsi untuk mengisi data ke elemen HTML
+        function displayWeather(data) {
+            const location = data.location;
+            const current = data.current;
+
+            // Update CUACA: <p id="lokasi"></p>
+            $('#lokasi').text(location.name);
+
+            // Update Suhu Utama
+            $('#suhu-utama').text(`${current.temp_c}°C`);
+            $('#kondisi-cuaca').text(current.condition.text);
+
+            // Update Data Rinci
+            $('#negara').text(location.country || 'N/A');
+            $('#provinsi').text(location.region || 'N/A'); // region dianggap sebagai Provinsi
+            $('#kecamatan').text(location.name || 'N/A');   // name dianggap sebagai Kecamatan/Kota
+            $('#suhu-detail').text(`${current.temp_c}°C (Terasa ${current.feelslike_c}°C)`);
+            $('#lon').text(location.lon);
+            $('#lat').text(location.lat);
+            
+            resultDiv.show();
+            errorDiv.hide();
+        }
+
+        // Event Listener untuk tombol Cari
+        searchButton.on('click', function() {
+            fetchData(locationInput.val().trim());
+        });
+
+        // Event Listener untuk tombol Enter di input
+        locationInput.on('keypress', function(e) {
+            if (e.which === 13) { // Key code 13 adalah Enter
+                fetchData(locationInput.val().trim());
+            }
+        });
+
+        // Muat data default saat halaman pertama kali dimuat
+        $(document).ready(function() {
+            fetchData(locationInput.val().trim());
+        });
+
+    </script>
     
 
 </body>
